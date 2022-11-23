@@ -1,4 +1,5 @@
 ﻿using HotelListing.API.Data;
+using HotelListing.API.Models.Country;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,23 @@ namespace HotelListing.API.Controllers
 
             return country;
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Country>> PostCountry(CreateCountryDto countryDto)
+        {
+            var country = new Country
+            {
+                Name = countryDto.Name,
+                ShortName = countryDto.ShortName
+            };
+
+            _context.Countries.Add(country);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetCountry", new { id = country.Id }, country);
+                
+                }
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCountry(int id, Country country)
