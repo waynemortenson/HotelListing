@@ -21,10 +21,12 @@ namespace HotelListing.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Country>>> GetCountries()
+        public async Task<ActionResult<IEnumerable<GetCountryDto>>> GetCountries()
         {
             var countries = await _context.Countries.ToListAsync();
+            var records = _mapper.Map<List<Country>>(countries);
             return Ok(countries);
+
         }
 
         [HttpGet("{id}")]
