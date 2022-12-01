@@ -28,7 +28,7 @@ builder.Services.AddCors(options =>
                .AllowAnyMethod());
 });
 
-builder.Services.AddIdentityCore<IdentityUser>()
+builder.Services.AddIdentityCore<ApiUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<HotelListingDbContext>();
 
