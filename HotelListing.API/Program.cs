@@ -33,7 +33,9 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddIdentityCore<ApiUser>()
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<HotelListingDbContext>();
+    .AddTokenProvider<DataProtectorTokenProvider<ApiUser>>("HotelListingApi")
+    .AddEntityFrameworkStores<HotelListingDbContext>()
+    .AddDefaultTokenProviders();
 
 
 builder.Host.UseSerilog((ctx, loggerConfig) => loggerConfig.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
