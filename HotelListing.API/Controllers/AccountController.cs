@@ -47,14 +47,14 @@ namespace HotelListing.API.Controllers
         public async Task<ActionResult> Login([FromBody] LoginDto loginDto)
         {
 
-            var isValidUser = await _authManager.login(loginDto);
+            var authResponse = await _authManager.login(loginDto);
 
-            if(!isValidUser)
+            if(authResponse == null)
             {
                 return Unauthorized();
             }
 
-            return Ok();
+            return Ok(authResponse);
         }
         
 
